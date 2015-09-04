@@ -22,12 +22,14 @@ module.exports = {
   createEvent: function (req, res){
     var eventCode = req.body.eventCode;
     dB.Event.findOne({eventCode: eventCode}, function(err, event){
+      console.log(event + "is the event");
       if (err){
         console.log(err);
       }
       if (event){
         sendResp(res, {event: false});
       } else {
+        console.log("route works");
         cloudinary.postImages(req, res);
         // postImages to cloudinary
         // with url we get back --> call
