@@ -26,12 +26,21 @@ var tess = angular.module("tessell", [
 tess.controller("tessellCtrl", function ($scope, $location, Upload){
   $scope.testing = false;
   $scope.eventTag = "";
+  $scope.theEvent = {};
 
   $scope.createEvent = function(){
+    console.log($scope.theEvent + "is the event object");
+    console.log($scope.theEvent.file + "is the file on the client side");
     Upload.upload({
       url: '/event/create',
-      file: $scope.event.file
-    });
+      fields: {'eventName': $scope.theEvent.eventCode},
+      file: $scope.theEvent.file
+    })
+    .success(function (data, status, headers, config) {
+        // console.log('file ' + config.file.name + 'uploaded. Response: ' + data);
+      }).error(function (data, status, headers, config) {
+        console.log('error status: ' + status);
+      });
   };
 
   $scope.go = function (event){

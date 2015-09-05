@@ -10,7 +10,7 @@
   <div ng-controller="tessellCtrl" class="text-vertical-center">
     <form>
     <div>
-      <input class="btn btn-lg" type="text" placeholder="Event Tag" ng-model="event.eventCode"/>
+      <input class="btn btn-lg" type="text" placeholder="Event Tag" ng-model="theEvent.eventCode"/>
     </div>
     <br>
     <div>
@@ -20,7 +20,7 @@
     </div>
     <br>
     <div>
-      <input class="btn btn-lg" type="file" ng-model="event.file">
+      <input class="btn btn-lg" type="file" ng-model="theEvent.file" name="file" accept="image/*">
     </div>
     <div>
       <input type="submit" value="PARTY" class="btn btn-lg" ng-click="createEvent()">

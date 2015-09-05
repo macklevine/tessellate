@@ -13,23 +13,27 @@ module.exports = {
     res.send("Hello from controller");
   },
 
-  postImages : function (req, res) {
+  postImages : function (req, res, next) {
+    console.log(req.files);
+    // cloudinary.uploader.upload(req, function(result){ 
+    //   next(result);
+    // });
+    // var busboy = new Busboy({ headers: req.headers });
+    // var stream = cloudinary.uploader.upload_stream(function(result) {
+    //   //TODO: write result to db
+    //   console.log(result);
+    //   next(result);
+    // });
 
-    var busboy = new Busboy({ headers: req.headers });
-    var stream = cloudinary.uploader.upload_stream(function(result) {
-      //TODO: write result to db
-      res.json(result);
-    });
-
-    busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
-      file.pipe(stream);
-    });
-    busboy.on('finish', function() {
-      res.writeHead(200, { 'Connection': 'close' });
-      res.end("That's all folks!");
-    });
+    // busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
+    //   file.pipe(stream);
+    // });
+    // busboy.on('finish', function() {
+    //   res.writeHead(200, { 'Connection': 'close' });
+    //   res.end("That's all folks!");
+    // });
     // return req.pipe(busboy);
-    req.pipe(busboy);
+    // return req.pipe(busboy);
 
   }
 
