@@ -6,7 +6,8 @@ var Event    = db.Event,
   Map    = db.Map;
 
 module.exports = {
-  getMap: function(eventCode){
+  getMap: function(req, res){
+    var eventCode = req.body.eventCode;
     Event.findOne({eventCode: eventCode}, function(err, event){
       //TODO: handle error
       if (!event){
@@ -17,7 +18,7 @@ module.exports = {
           if (!map){
             console.log("error: map not found");
           } else if (map){
-            
+            res.send(map);
           }
         })
       }
@@ -28,3 +29,19 @@ module.exports = {
     
   }
 };
+
+//Example angular code below:
+
+    // AuthService.login($scope.user)
+    //   .then(function (token) {
+    //     if (token === "password incorrect"){
+    //       $scope.passwordIncorrect = true;
+    //       $scope.usernameNotFound = false;
+    //     } else if (token === "username not found"){
+    //       $scope.usernameNotFound = true;
+    //       $scope.passwordIncorrect = false;
+    //     } else {
+    //       $window.localStorage.setItem('com.beer-tab', token);
+    //       $location.path('/main');
+    //     }
+    //   })
