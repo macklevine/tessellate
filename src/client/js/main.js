@@ -118,7 +118,7 @@ tess.controller('DatepickerDemoCtrl', function ($scope) {
       $http.post('/event/join', {eventCode: eventTag})
         .then(function(response){
           console.log(response);
-        })
+        });
       console.log('handling the event checking for', eventTag);
     };
     return eventFactory;
