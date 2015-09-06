@@ -5,29 +5,38 @@ var Event    = db.Event,
   User     = db.User,
   Map    = db.Map;
 
+//both functions should have the event send along on req.body.
+//should the event be held in local storage? Or a $scope variable? discuss this on Monday.
 module.exports = {
+  //for users trying to view an event.
   getMap: function(req, res){
-    var eventCode = req.body.eventCode;
-    Event.findOne({eventCode: eventCode}, function(err, event){
+    //TODO: handle error
+    Map.findOne({_parentEvent: req.body.event._id}, function(err, map){
       //TODO: handle error
-      if (!event){
-        console.log("error: event not found");
-      } else if (event){
-        Map.findOne({_parentEvent: event._id}, function(err, map){
-          //TODO: handle error
-          if (!map){
-            console.log("error: map not found");
-          } else if (map){
-            res.send(map);
-          }
-        })
+      if (!map){
+        console.log("error: map not found");
+      } else if (map){
+        res.send(map);
       }
     });
   },
 
-  saveMap: function(event, data){
-    
+  saveMap: function(req, res){
+    var conditions = {_parentEvent: req.body.event._id},
+        update     = {data: req.body.event.map.data},
+        options    = {new: true}, //guarantees that the callback returns the saved map object.
+
+    Map.findOneAndUpdate(conditions, update, options, function(err, foundMap){
+      res.send(foundMap);
+    });
+      //TODO: add callback, etc.
   }
+
+  //   var conditions = { name: 'borne' }
+  //   , update = { $inc: { visits: 1 }}
+  //   , options = { multi: true };
+
+  // Model.update(conditions, update, options, callback);
 };
 
 //Example angular code below:
