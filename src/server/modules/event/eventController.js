@@ -33,8 +33,8 @@ module.exports = {
         sendResp(res, {event: false});
       } else {
         cloudinary.postImages(req, res, function(result){
-          mapmaker.saveEventAndMap("mack", result.url, eventCode, function(){
-            console.log("everything's done");
+          mapmaker.saveEventAndMap("mack", result.url, eventCode, function(map){
+            res.json(map);
           });
         });
       }
