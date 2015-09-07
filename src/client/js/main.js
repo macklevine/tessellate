@@ -107,6 +107,8 @@ tess.controller('tessellCtrl', ['$scope', "eventFactory", "$location",  function
         formData.append("eventCode", $scope.eventTag);
       },
       'success': function (file, response) {
+        //change location to be somewhere else
+        console.log(response);
         console.log('done with sending photo');
       }
     }

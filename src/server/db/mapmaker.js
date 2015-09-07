@@ -75,6 +75,7 @@ var mapEventMaker = function(username, filePath, _storage, pixels, eventCode, ca
       })
       .save(function(err, map){
         console.log(event + "should be the saved event");
+        console.log(map._id + "should be the saved map");
         event.map = map._id;
         event.save()
           .then(function(){
