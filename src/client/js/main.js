@@ -90,7 +90,7 @@ var tess = angular.module("tessell", [
   };*/
 
 tess.controller('tessellCtrl', ['$scope', "eventFactory", "$location",  function ($scope, eventFactory, $location){
-  $scope.eventTag = "";
+  // $scope.eventTag = "";
   $scope.checkForExistingEvent = function(){
     eventFactory.checkForExistingEvent($scope.eventTag);
   };
@@ -114,15 +114,15 @@ tess.controller('tessellCtrl', ['$scope', "eventFactory", "$location",  function
 }]);
 
 tess.factory('eventFactory', ["$http", function ($http){
-var eventFactory = {};
-eventFactory.checkForExistingEvent = function(eventTag){
-  $http.post('/event/join', {eventCode: eventTag})
-    .then(function(response){
-      console.log(response);
-    });
-  console.log('handling the event checking for', eventTag);
-};
-return eventFactory;
+  var eventFactory = {};
+  eventFactory.checkForExistingEvent = function(eventTag){
+    $http.post('/event/join', {eventCode: eventTag})
+      .then(function(response){
+        console.log(response);
+      });
+    console.log('handling the event checking for', eventTag);
+  };
+  return eventFactory;
 }]);
 
 
